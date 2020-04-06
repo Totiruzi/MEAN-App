@@ -99,7 +99,7 @@ exports.updatePost = (req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-  Post.deleteOne({ _id: req.params.id, greator: req.userData.userId })
+  Post.deleteOne({ _id: req.params.id, creator: req.userData.userId })
     .then((result) => {
       // console.log(result);
       if (result.n > 0) {

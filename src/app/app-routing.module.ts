@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGaurd } from './auth/auth.guard';
-import { SignupComponent } from './auth/signup/signup.component';
-import { LoginComponent } from './auth/login/login.component';
 import { PostListComponent } from './posts/post-list/post-list.component';
 import { PostCreatComponent } from './posts/post-creat/post-creat.component';
 
@@ -12,15 +10,17 @@ const routes: Routes = [
   {
     path: 'edit/:postId',
     component: PostCreatComponent,
-    canActivate: [AuthGaurd]
+    canActivate: [AuthGaurd],
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent }
+  {
+    path: 'auth',
+    loadChildren: () => import('./auth/auth-module').then((m) => m.AuthModule),
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGaurd]
+  providers: [AuthGaurd],
 })
 export class AppRoutingModule {}
